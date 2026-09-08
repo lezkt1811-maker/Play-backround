@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Background Player</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #111;
+    color: #fff;
+    font-family: -apple-system, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #startBtn {
+    padding: 24px 48px;
+    font-size: 20px;
+    border-radius: 16px;
+    border: none;
+    background: #2d7bf0;
+    color: #fff;
+  }
+  #status {
+    margin-top: 20px;
+    font-size: 16px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <button id="startBtn">▶ Start</button>
+  <div id="status">Tap once, then you can switch apps</div>
+</div>
+
+<audio id="player" loop preload="auto">
+  <source src="recording.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const audio = document.getElementById('player');
+  const btn = document.getElementById('startBtn');
+  const status = document.getElementById('status');
+
+  btn.addEventListener('click', () => {
+    audio.play().then(() => {
+      btn.style.display = 'none';
+      status.textContent = 'Playing — you can switch to another app now';
+    }).catch(() => {
+      status.textContent = 'Playback blocked — tap Start again';
+    });
+  });
+</script>
+
+</body>
+</html>
